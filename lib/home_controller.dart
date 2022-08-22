@@ -24,7 +24,8 @@ class HomeController {
   BitmapDescriptor? markerIcon;
   LatLng? currentLocation;
   GoogleMapController? mapController;
-  Dio dio = Dio(BaseOptions(baseUrl: 'https://116f-170-80-226-181.ngrok.io'));
+  Dio dio =
+      Dio(BaseOptions(baseUrl: 'https://api-niltondiniz.cloud.okteto.net'));
   State? state;
   BuildContext? context;
   Timer? mapUpdateTimer;
