@@ -35,7 +35,15 @@ class HomeController {
   );
   late StreamSubscription<Position> positionStream;
   String? searchText;
-  Uint8List? customMarker;
+  Uint8List? customMarkerCantagalo;
+  Uint8List? customMarkerJaqueira;
+  Uint8List? customMarkerMirante;
+  Uint8List? customMarkerMonteCastelo;
+  Uint8List? customMarkerMorada;
+  Uint8List? customMarkerPalmital;
+  Uint8List? customMarkerPiloes;
+  Uint8List? customMarkerPonte;
+  Uint8List? customMarkerMoura;
 
   Future<bool> getBusPosition() async {
     var response = await dio.get('/position');
@@ -165,23 +173,28 @@ class HomeController {
     );
 
     for (var element in filteredList) {
-      var dateFromMilliseconds =
-          DateTime.fromMillisecondsSinceEpoch(element.positionTime);
-      var formatedTime =
-          '${dateFromMilliseconds.day}/${dateFromMilliseconds.month}/${dateFromMilliseconds.year} ${dateFromMilliseconds.hour}:${dateFromMilliseconds.minute}:${dateFromMilliseconds.second}';
-      busMarkerList.add(
-        Marker(
-          markerId: MarkerId(
-            element.lat.toString(),
+      try {
+        var dateFromMilliseconds =
+            DateTime.fromMillisecondsSinceEpoch(element.positionTime);
+        var formatedTime =
+            '${dateFromMilliseconds.day}/${dateFromMilliseconds.month}/${dateFromMilliseconds.year} ${dateFromMilliseconds.hour}:${dateFromMilliseconds.minute}:${dateFromMilliseconds.second}';
+        busMarkerList.add(
+          Marker(
+            markerId: MarkerId(
+              element.lat.toString(),
+            ),
+            position: LatLng(element.lat, element.lon),
+            icon: BitmapDescriptor.fromBytes(
+                getCustomMarkerByName(element.busId)!),
+            infoWindow: InfoWindow(
+                title: element.busId,
+                snippet:
+                    '${element.busInfo} \nÚltima localização: $formatedTime'),
           ),
-          position: LatLng(element.lat, element.lon),
-          icon: BitmapDescriptor.fromBytes(customMarker!),
-          infoWindow: InfoWindow(
-              title: element.busId,
-              snippet:
-                  '${element.busInfo} \nÚltima localização: $formatedTime'),
-        ),
-      );
+        );
+      } catch (e) {
+        print('Não use prints em try catchs!!');
+      }
     }
     // ignore: invalid_use_of_protected_member
     state!.setState(() {});
@@ -198,9 +211,73 @@ class HomeController {
         .asUint8List();
   }
 
+  getCustomMarkerByName(String name) {
+    switch (name) {
+      case 'Cantagalo':
+        return customMarkerCantagalo;
+      case 'Jaqueira':
+        return customMarkerJaqueira;
+      case 'Mirante Sul':
+        return customMarkerMirante;
+      case 'Monte Castelo':
+        return customMarkerMonteCastelo;
+      case 'Morada do Sol':
+        return customMarkerMorada;
+      case 'Palmital':
+        return customMarkerPalmital;
+      case 'Pilões':
+        return customMarkerPiloes;
+      case 'Ponte das Garças':
+        return customMarkerPonte;
+      case 'Moura Brasil':
+        return customMarkerMoura;
+      default:
+    }
+  }
+
   initMarker() async {
-    customMarker = await getBytesFromAsset(
-      path: 'assets/markers/bus_100.png',
+    customMarkerCantagalo = await getBytesFromAsset(
+      path: 'assets/markers/bus_cantagalo.png',
+      width: 180,
+    );
+
+    customMarkerJaqueira = await getBytesFromAsset(
+      path: 'assets/markers/bus_jaqueira.png',
+      width: 180,
+    );
+
+    customMarkerMirante = await getBytesFromAsset(
+      path: 'assets/markers/bus_mirante.png',
+      width: 180,
+    );
+
+    customMarkerMonteCastelo = await getBytesFromAsset(
+      path: 'assets/markers/bus_monte_castelo.png',
+      width: 180,
+    );
+
+    customMarkerMorada = await getBytesFromAsset(
+      path: 'assets/markers/bus_morada.png',
+      width: 180,
+    );
+
+    customMarkerPalmital = await getBytesFromAsset(
+      path: 'assets/markers/bus_palmital.png',
+      width: 180,
+    );
+
+    customMarkerPiloes = await getBytesFromAsset(
+      path: 'assets/markers/bus_piloes.png',
+      width: 180,
+    );
+
+    customMarkerPonte = await getBytesFromAsset(
+      path: 'assets/markers/bus_ponte.png',
+      width: 180,
+    );
+
+    customMarkerMoura = await getBytesFromAsset(
+      path: 'assets/markers/bus_moura.png',
       width: 180,
     );
   }

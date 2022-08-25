@@ -85,6 +85,7 @@ flutter:
     - assets/markers/bus_50.png
     - assets/markers/bus_75.png
     - assets/markers/bus_100.png
+    - assets/markers/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
