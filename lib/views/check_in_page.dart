@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gdg_2022/vertical_space_16.dart';
+import 'package:gdg_2022/views/widgets/vertical_space_16.dart';
 
 // ignore: must_be_immutable
 class CheckInPage extends StatefulWidget {

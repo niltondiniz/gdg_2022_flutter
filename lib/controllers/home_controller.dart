@@ -4,17 +4,15 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
-import 'package:gdg_2022/bus_position_entity.dart';
-import 'package:gdg_2022/checkin_entity.dart';
+import 'package:gdg_2022/models/checkin_entity.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:ui' as ui;
 import 'dart:typed_data';
-
-import 'check_in_page.dart';
+import '../models/bus_position_entity.dart';
+import '../views/check_in_page.dart';
 
 class HomeController {
   List<BusPositionEntity> busPositions = [];

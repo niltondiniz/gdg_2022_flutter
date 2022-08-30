@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gdg_2022/home_controller.dart';
+import 'package:gdg_2022/controllers/home_controller.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 
@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   final Completer<GoogleMapController> _controller = Completer();
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(-22.1219555, -43.2104422),
-    zoom: 14.4746,
+    zoom: 15,
   );
 
   InputBorder enabledBorder = const OutlineInputBorder(

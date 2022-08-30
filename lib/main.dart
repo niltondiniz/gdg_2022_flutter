@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import 'package:gdg_2022/views/home_page.dart';
 
 void main() {
   runApp(const GdgApp());
