@@ -52,61 +52,50 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     controller.context = context;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('KD o Busão?'),
-      // ),
-      body: SafeArea(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Stack(
-            children: [
-              GoogleMap(
-                zoomControlsEnabled: false,
-                markers: controller.busMarkerList,
-                mapType: MapType.normal,
-                myLocationButtonEnabled: false,
-                initialCameraPosition: _kGooglePlex,
-                onMapCreated: (GoogleMapController mapController) {
-                  _controller.complete(mapController);
-                  controller.mapController = mapController;
-                  controller.centerMap();
-                },
-              ),
-              Positioned(
-                top: 32,
-                left: 16,
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  //height: 70,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black12,
-                            spreadRadius: 2,
-                            offset: Offset(3, 3),
-                            blurRadius: 3)
-                      ]),
-                  child: Center(
-                    child: TextField(
-                      textAlignVertical: TextAlignVertical.center,
-                      //style: TextStyle(fontSize: 25),
-                      onChanged: controller.findBus,
-                      controller: findField,
-                      decoration: InputDecoration(
-                          hintText: 'Pesquise o ônibus desejado',
-                          prefixIcon: const Icon(Icons.search),
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none),
-                    ),
-                  ),
+      body: Stack(
+        children: [
+          GoogleMap(
+            zoomControlsEnabled: false,
+            markers: controller.busMarkerList,
+            mapType: MapType.normal,
+            myLocationButtonEnabled: false,
+            initialCameraPosition: _kGooglePlex,
+            onMapCreated: (GoogleMapController mapController) {
+              _controller.complete(mapController);
+              controller.mapController = mapController;
+              controller.centerMap();
+            },
+          ),
+          Positioned(
+            top: 40,
+            left: 16,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        spreadRadius: 2,
+                        offset: Offset(3, 3),
+                        blurRadius: 3)
+                  ]),
+              child: Center(
+                child: TextField(
+                  textAlignVertical: TextAlignVertical.center,
+                  onChanged: controller.findBus,
+                  controller: findField,
+                  decoration: InputDecoration(
+                      hintText: 'Pesquise o ônibus desejado',
+                      prefixIcon: const Icon(Icons.search),
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none),
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
